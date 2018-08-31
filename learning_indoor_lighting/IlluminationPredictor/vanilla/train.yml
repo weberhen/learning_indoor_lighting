@@ -1,0 +1,25 @@
+#paths
+data_path : <path/to/dataset>
+data_folders :
+    - 
+ae_path : <path/to/autoencoder/model>
+model_path : <path/to/IlluminationPredictor/model
+network : learning_indoor_lighting.IlluminationPredictor.vanilla.net
+hdr_mean_std : <path/to/hdr_mean_std>
+ldr_mean_std : <path/to/hdr_mean_std>
+
+#training
+gradient_clip : False
+use_tensorboard : False
+epochs : 999
+batch_size : 16
+learning_rate : 0.001
+optimizer : Adam
+forget_best_prec : False
+load_best : False
+save_estimation : False
+
+#performance
+workers : 0
+use_shared_memory : True
+backend : cuda
