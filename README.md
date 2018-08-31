@@ -31,3 +31,4 @@ estimations even from diffuse objects.
 * tqdm
 * tensorflow (for tensorboard)
 * pyyaml
+* pytorch_toolbox (https://github.com/weberhen/pytorch_toolbox) commit a6a6ad6
