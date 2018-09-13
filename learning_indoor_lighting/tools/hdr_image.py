@@ -1,7 +1,7 @@
 from torchvision import transforms
-from illuminnet.tools.data_handler import DataHandler
-from illuminnet.tools.transformations import Scale, Log1p, NumpyImage2Tensor, Normalize, TonemapHDR
-from illuminnet.tools.utils import dataset_stats_load, save_hdr
+from learning_indoor_lighting.tools.data_handler import DataHandler
+from learning_indoor_lighting.tools.transformations import Scale, Log1p, NumpyImage2Tensor, Normalize, TonemapHDR
+from learning_indoor_lighting.tools.utils import dataset_stats_load, save_hdr
 import numpy as np
 
 

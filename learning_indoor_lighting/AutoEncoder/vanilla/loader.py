@@ -4,7 +4,7 @@ import os
 import numpy as np
 import torch
 from pytorch_toolbox.loader_base import LoaderBase
-from illuminnet.tools.utils import load_hdr
+from learning_indoor_lighting.tools.utils import load_hdr
 
 
 class AutoEncoderDataset(LoaderBase):

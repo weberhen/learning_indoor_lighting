@@ -1,5 +1,5 @@
 import numpy as np
-from illuminnet.tools.visdom_logger import VisdomLogger
+from learning_indoor_lighting.tools.visdom_logger import VisdomLogger
 
 
 class DataHandler:

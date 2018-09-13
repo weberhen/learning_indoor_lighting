@@ -5,8 +5,8 @@ import Imath
 import OpenEXR
 import os
 import importlib
-from illuminnet.tools.transformations import *
-from illuminnet.tools.visdom_logger import VisdomLogger
+from learning_indoor_lighting.tools.transformations import *
+from learning_indoor_lighting.tools.visdom_logger import VisdomLogger
 import yaml
 
 
