@@ -1,5 +1,7 @@
 # Learning to Estimate Indoor Lighting from 3D Objects
 
+http://vision.gel.ulaval.ca/~jflalonde/projects/illumPredict/index.html
+
 In this work, we propose a step towards a more accurate
 prediction of the environment light given a single picture
 of a known object. To achieve this, we developed a deep
