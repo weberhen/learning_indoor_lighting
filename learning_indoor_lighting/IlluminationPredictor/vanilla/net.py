@@ -1,6 +1,6 @@
 import torch.nn.functional as f
 from tools.utils import *
-from illuminnet.AutoEncoder.vanilla.net import AutoEncoderNet
+from learning_indoor_lighting.AutoEncoder.vanilla.net import AutoEncoderNet
 from pytorch_toolbox.network_base import NetworkBase
 
 # python 3 confusing imports :(

@@ -1,8 +1,8 @@
 from torchvision import transforms
 import numpy as np
-from illuminnet.tools.data_handler import DataHandler
-from illuminnet.tools.transformations import ToFloat, NumpyImage2Tensor, Normalize
-from illuminnet.tools.utils import dataset_stats_load
+from learning_indoor_lighting.tools.data_handler import DataHandler
+from learning_indoor_lighting.tools.transformations import ToFloat, NumpyImage2Tensor, Normalize
+from learning_indoor_lighting.tools.utils import dataset_stats_load
 
 
 class LDRImageHandler(DataHandler):

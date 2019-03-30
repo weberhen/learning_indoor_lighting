@@ -1,6 +1,6 @@
 import os
 from pytorch_toolbox.loop_callback_base import LoopCallbackBase
-from illuminnet.tools.utils import to_np
+from learning_indoor_lighting.tools.utils import to_np
 from torch.autograd import Variable
 
 

@@ -6,45 +6,45 @@ import numpy as np
 import torch
 
 
-class RandomRotation(object):
-    """
-        input : nd.array batch of images : [N, H, W, C]
-        output : nd.array batch of images : [N, H, W, C]
-    """
-
-    @staticmethod
-    def sph2cart(phi, theta, r):
-        import math
-        points = np.zeros(3)
-        points[0] = r * math.sin(phi) * math.cos(theta)
-        points[1] = r * math.sin(phi) * math.sin(theta)
-        points[2] = r * math.cos(phi)
-        return points
-
-    @staticmethod
-    def set_rotation(x, y, z):
-        from illuminnet import angles as ea
-        matrix = np.eye(3, dtype=np.float32)
-        matrix[0:3, 0:3] = ea.euler2mat(x, y, z)
-
-        return matrix
-
-    def random_direction(self):
-        import math
-        # Random pose on a sphere : https://www.jasondavies.com/maps/random-points/
-        theta = np.random.uniform(0, 1) * math.pi * 2
-        phi = math.acos((2 * (np.random.uniform(0, 1))) - 1)
-        x, y, z = self.sph2cart(phi, theta, 1)
-        return self.set_rotation(x, y, z)
-
-    def __call__(self, sample):
-        from envmap import EnvironmentMap
-        image = EnvironmentMap(64, 'LatLong')
-        image.data = sample
-        rotation = self.random_direction()
-        img_hdr = image.rotate('DCM', rotation).data.astype('float32')
-        sample = img_hdr
-        return sample
+# class RandomRotation(object):
+#     """
+#         input : nd.array batch of images : [N, H, W, C]
+#         output : nd.array batch of images : [N, H, W, C]
+#     """
+#
+#     @staticmethod
+#     def sph2cart(phi, theta, r):
+#         import math
+#         points = np.zeros(3)
+#         points[0] = r * math.sin(phi) * math.cos(theta)
+#         points[1] = r * math.sin(phi) * math.sin(theta)
+#         points[2] = r * math.cos(phi)
+#         return points
+#
+#     @staticmethod
+#     def set_rotation(x, y, z):
+#         from learning_indoor_lighting import angles as ea
+#         matrix = np.eye(3, dtype=np.float32)
+#         matrix[0:3, 0:3] = ea.euler2mat(x, y, z)
+#
+#         return matrix
+#
+#     def random_direction(self):
+#         import math
+#         # Random pose on a sphere : https://www.jasondavies.com/maps/random-points/
+#         theta = np.random.uniform(0, 1) * math.pi * 2
+#         phi = math.acos((2 * (np.random.uniform(0, 1))) - 1)
+#         x, y, z = self.sph2cart(phi, theta, 1)
+#         return self.set_rotation(x, y, z)
+#
+#     def __call__(self, sample):
+#         from envmap import EnvironmentMap
+#         image = EnvironmentMap(64, 'LatLong')
+#         image.data = sample
+#         rotation = self.random_direction()
+#         img_hdr = image.rotate('DCM', rotation).data.astype('float32')
+#         sample = img_hdr
+#         return sample
 
 
 class Log1p(object):

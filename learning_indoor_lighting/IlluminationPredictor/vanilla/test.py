@@ -3,11 +3,11 @@
 import sys
 import os
 from torch.utils import data
-from illuminnet.tools.utils import yaml_load, DictAsMember, load_from_file
-from illuminnet.tools.ldr_image import LDRImageHandler
-from illuminnet.tools.hdr_image import HDRImageHandler
-from illuminnet.IlluminationPredictor.vanilla.loader import IlluminationPredictorDataset
-from illuminnet.IlluminationPredictor.vanilla.callback import IlluminationPredictorCallback
+from learning_indoor_lighting.tools.utils import yaml_load, DictAsMember, load_from_file
+from learning_indoor_lighting.tools.ldr_image import LDRImageHandler
+from learning_indoor_lighting.tools.hdr_image import HDRImageHandler
+from learning_indoor_lighting.IlluminationPredictor.vanilla.loader import IlluminationPredictorDataset
+from learning_indoor_lighting.IlluminationPredictor.vanilla.callback import IlluminationPredictorCallback
 from pytorch_toolbox.train_loop import TrainLoop
 
 if __name__ == '__main__':

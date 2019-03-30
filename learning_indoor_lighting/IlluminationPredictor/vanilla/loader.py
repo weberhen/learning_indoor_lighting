@@ -2,7 +2,7 @@
 # IlluminationPredictor loader
 
 from pytorch_toolbox.loader_base import LoaderBase
-from illuminnet.tools.utils import find_images, load_hdr_multichannel, TonemapHDR
+from learning_indoor_lighting.tools.utils import find_images, load_hdr_multichannel, TonemapHDR
 import os
 import torch
 from numpy import inf
