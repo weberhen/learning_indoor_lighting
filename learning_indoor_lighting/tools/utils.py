@@ -21,6 +21,17 @@ def dataset_stats_load(filename):
     return mean, std
 
 
+def find_images(root, extension='.exr'):
+    dir = os.path.expanduser(root)
+    images_path = []
+    files = [x for x in sorted(os.listdir(dir)) if x.endswith(extension)]
+    for file in files:
+        path = os.path.join(dir, file)
+        images_path.append(path)
+
+    return images_path
+
+
 def load_hdr(path):
     pt = Imath.PixelType(Imath.PixelType.FLOAT)
     rgb_img_openexr = OpenEXR.InputFile(path)

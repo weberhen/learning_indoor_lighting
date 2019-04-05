@@ -1,5 +1,5 @@
 import torch.nn.functional as f
-from tools.utils import *
+from learning_indoor_lighting.tools.utils import *
 from learning_indoor_lighting.AutoEncoder.vanilla.net import AutoEncoderNet
 from pytorch_toolbox.network_base import NetworkBase
 
