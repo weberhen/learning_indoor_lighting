@@ -1,6 +1,12 @@
-# Learning to Estimate Indoor Lighting from 3D Objects
-# http://vision.gel.ulaval.ca/~jflalonde/projects/illumPredict/index.html
-# Henrique Weber, 2018
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# Created by: Henrique Weber
+# LVSN, Universite Labal
+# Email: henrique.weber.1@ulaval.ca
+# Copyright (c) 2018
+#
+# This source code is licensed under the MIT-style license found in the
+# LICENSE file in the root directory of this source tree
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 import os
 import numpy as np

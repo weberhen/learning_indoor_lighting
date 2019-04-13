@@ -1,7 +1,12 @@
-'''
-The visualization class provides an easy access to some of the visdom functionalities
-Accept as input a number that will be ploted over time or an image of type np.ndarray
-'''
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# Created by: Henrique Weber
+# LVSN, Universite Labal
+# Email: henrique.weber.1@ulaval.ca
+# Copyright (c) 2018
+#
+# This source code is licensed under the MIT-style license found in the
+# LICENSE file in the root directory of this source tree
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 from visdom import Visdom
 import numpy as np
@@ -9,6 +14,10 @@ import numbers
 
 
 class VisdomLogger:
+    """
+    The visualization class provides an easy access to some of the visdom functionalities
+    Accept as input a number that will be ploted over time or an image of type np.ndarray
+    """
     items_iterator = {}
     items_to_visualize = {}
     windows = {}

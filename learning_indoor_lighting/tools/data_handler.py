@@ -1,3 +1,13 @@
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# Created by: Henrique Weber
+# LVSN, Universite Labal
+# Email: henrique.weber.1@ulaval.ca
+# Copyright (c) 2018
+#
+# This source code is licensed under the MIT-style license found in the
+# LICENSE file in the root directory of this source tree
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 import numpy as np
 from learning_indoor_lighting.tools.visdom_logger import VisdomLogger
 
