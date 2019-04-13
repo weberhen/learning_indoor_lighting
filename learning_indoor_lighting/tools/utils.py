@@ -133,7 +133,7 @@ def log_tensorboard(_model, epoch, tensorboard_logger):
 
 def yaml_load(filepath):
     with open(filepath, "r") as file_descriptor:
-        data = yaml.load(file_descriptor)
+        data = yaml.load(file_descriptor, Loader=yaml.FullLoader)
         return data
 
 
