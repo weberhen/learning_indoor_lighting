@@ -1,18 +1,19 @@
-import torch.nn.functional as f
-from tools.utils import *
-from learning_indoor_lighting.AutoEncoder.vanilla.net import AutoEncoderNet
-from pytorch_toolbox.network_base import NetworkBase
+# Learning to Estimate Indoor Lighting from 3D Objects
+# http://vision.gel.ulaval.ca/~jflalonde/projects/illumPredict/index.html
+# Henrique Weber, 2018
 
-# python 3 confusing imports :(
-from .unet_parts import *
+import torch.nn.functional as f
+import torch.nn as nn
+import torch
+from torch.autograd import Variable
+from pytorch_toolbox.network_base import NetworkBase
+from learning_indoor_lighting.tools.utils import check_nans
+from learning_indoor_lighting.AutoEncoder.vanilla.net import AutoEncoderNet
 
 
 class IlluminationPredictorNet(NetworkBase):
     def __init__(self, configs):
         super(IlluminationPredictorNet, self).__init__()
-        self.relu = nn.ReLU()
-        self.tanh = nn.Tanh()
-        # encoder
         self.conv1 = nn.Conv2d(6, 64, 5, stride=2)
         self.conv1_bn = nn.BatchNorm2d(64)
         self.conv2 = nn.Conv2d(64, 256, 3, stride=2)
@@ -23,20 +24,21 @@ class IlluminationPredictorNet(NetworkBase):
         self.conv4_bn = nn.BatchNorm2d(128)
         self.fc1 = nn.Linear(4608, 256)
         self.conv5_bn = nn.BatchNorm1d(256)
-        self.drop = nn.Dropout2d(p=.2)
         self.fc2 = nn.Linear(256, 128)
-        self.loaded_ae = False
 
         self.configs = configs
-
+        self.relu = nn.ReLU()
         self.criterion = nn.MSELoss()
 
-        filename = 'model_best.pth.tar'
+        # load autoencoder to decode the latent vector produced by the IlluminationPredictorNet
         self.ae = AutoEncoderNet()
-        self.ae.load_state_dict(torch.load('{}/{}'.format(configs.ae_path, filename))['state_dict'])
+        if self.configs.train:
+            filename = 'model_best.pth.tar'
+            self.ae.load_state_dict(torch.load('{}/{}'.format(configs.ae_path, filename), map_location=configs.backend)
+                                    ['state_dict'])
 
         self.ae.eval()
-        self.ae.cuda()
+        self.ae.to(configs.backend)
 
     def forward(self, x):
 
@@ -48,18 +50,11 @@ class IlluminationPredictorNet(NetworkBase):
         x = self.conv5_bn(self.fc1(x))
         x = self.fc2(x)
 
-        # Check for NaNs and infinities
-        nans = np.sum(np.isnan(x.cpu().data.numpy()))
-        infs = np.sum(np.isinf(x.cpu().data.numpy()))
-        if nans > 0:
-            print("There is {} NaN at the output layer".format(nans))
-        if infs > 0:
-            print("There is {} infinite values at the output layer".format(infs))
+        check_nans(x)
 
         return x
 
     def loss(self, predictions, targets):
-        from torch.autograd import Variable
         lz = self.criterion(predictions[0], Variable(targets[0], requires_grad=False).cuda())
         return lz
 

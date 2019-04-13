@@ -120,6 +120,17 @@ def yaml_load(filepath):
         return data
 
 
+def find_images(root, extension='.exr'):
+    dir = os.path.expanduser(root)
+    images_path = []
+    files = [x for x in sorted(os.listdir(dir)) if x.endswith(extension)]
+    for file in files:
+        path = os.path.join(dir, file)
+        images_path.append(path)
+
+    return images_path
+
+
 class DictAsMember(dict):
     def __getattr__(self, name):
         value = self[name]
@@ -139,3 +150,23 @@ def load_from_file(module_name, class_name, *kargs):
     assert class_inst
 
     return class_inst
+
+
+def check_nans(x):
+    # Check for NaNs and infinities
+    nans = np.sum(np.isnan(x.cpu().data.numpy()))
+    infs = np.sum(np.isinf(x.cpu().data.numpy()))
+    if nans > 0:
+        print("There is {} NaN at the output layer".format(nans))
+    if infs > 0:
+        print("There is {} infinite values at the output layer".format(infs))
+
+
+def setup_optimizer(model, chosen_optimizer , learning_rate):
+    from torch import optim
+    if chosen_optimizer == 'Adam':
+        optimizer = optim.Adam(model.parameters(), lr=learning_rate, weight_decay=1e-5)
+    else:
+        optimizer = optim.SGD(model.parameters(), lr=learning_rate, momentum=0.9)
+
+    return optimizer
