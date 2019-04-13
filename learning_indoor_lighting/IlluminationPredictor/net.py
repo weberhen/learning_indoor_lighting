@@ -8,7 +8,7 @@ import torch
 from torch.autograd import Variable
 from pytorch_toolbox.network_base import NetworkBase
 from learning_indoor_lighting.tools.utils import check_nans
-from learning_indoor_lighting.AutoEncoder.vanilla.net import AutoEncoderNet
+from learning_indoor_lighting.AutoEncoder.net import AutoEncoderNet
 
 
 class IlluminationPredictorNet(NetworkBase):
