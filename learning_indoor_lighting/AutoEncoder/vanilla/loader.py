@@ -1,3 +1,5 @@
+# Learning to Estimate Indoor Lighting from 3D Objects
+# http://vision.gel.ulaval.ca/~jflalonde/projects/illumPredict/index.html
 # Henrique Weber, 2018
 
 import os

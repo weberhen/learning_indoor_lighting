@@ -1,3 +1,7 @@
+# Learning to Estimate Indoor Lighting from 3D Objects
+# http://vision.gel.ulaval.ca/~jflalonde/projects/illumPredict/index.html
+# Henrique Weber, 2018
+
 import os
 from pytorch_toolbox.loop_callback_base import LoopCallbackBase
 import numpy as np

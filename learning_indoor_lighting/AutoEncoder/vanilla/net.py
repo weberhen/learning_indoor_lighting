@@ -1,3 +1,5 @@
+# Learning to Estimate Indoor Lighting from 3D Objects
+# http://vision.gel.ulaval.ca/~jflalonde/projects/illumPredict/index.html
 # Henrique Weber, 2018
 
 import torch
@@ -7,6 +9,7 @@ import numpy as np
 from torch.autograd import Variable
 from envmap import EnvironmentMap
 from pytorch_toolbox.network_base import NetworkBase
+from learning_indoor_lighting.tools.utils import check_nans
 
 
 class AutoEncoderNet(NetworkBase):
@@ -86,13 +89,7 @@ class AutoEncoderNet(NetworkBase):
         # decoder
         x = self.decode(x)
 
-        # Check for NaNs and infinities
-        nans = np.sum(np.isnan(x.cpu().data.numpy()))
-        infs = np.sum(np.isinf(x.cpu().data.numpy()))
-        if nans > 0:
-            print("There is {} NaN at the output layer".format(nans))
-        if infs > 0:
-            print("There is {} infinite values at the output layer".format(infs))
+        check_nans(x)
 
         return x
 
