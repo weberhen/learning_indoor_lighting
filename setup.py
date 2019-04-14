@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup
 
 setup(
     name='learning_indoor_lighting',
@@ -6,5 +6,5 @@ setup(
               'learning_indoor_lighting.AutoEncoder',
               'learning_indoor_lighting.IlluminationPredictor',
               'learning_indoor_lighting.tools'],
-    requires=['numpy', 'tqdm', 'visdom', 'pyyaml','pytorch','openexr']
+    install_requires=['numpy', 'tqdm', 'visdom', 'pyyaml','openexr', 'torchvision', 'rotlib', 'imageio']
 )

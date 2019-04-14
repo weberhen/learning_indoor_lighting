@@ -23,14 +23,8 @@ estimations even from diffuse objects.
 -------
 
 ## Dependencies:
+Run
+`python setup.py install`
 
-* OpenEXR
-* Imath
-* numpy
-* pytorch (torch 0.4)
-* visdom
 * skylibs (https://github.com/soravux/skylibs)
-* tqdm
-* tensorflow (for tensorboard)
-* pyyaml
-* pytorch_toolbox (https://github.com/weberhen/pytorch_toolbox) commit a6a6ad6
+* pytorch_toolbox (https://github.com/weberhen/pytorch_toolbox)
