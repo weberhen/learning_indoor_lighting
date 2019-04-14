@@ -4,7 +4,7 @@
 # Email: henrique.weber.1@ulaval.ca
 # Copyright (c) 2018
 #
-# This source code is licensed under the MIT-style license found in the
+# This source code is licensed under the license found in the
 # LICENSE file in the root directory of this source tree
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

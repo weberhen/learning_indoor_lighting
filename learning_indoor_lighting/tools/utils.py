@@ -4,20 +4,31 @@
 # Email: henrique.weber.1@ulaval.ca
 # Copyright (c) 2018
 #
-# This source code is licensed under the MIT-style license found in the
+# This source code is licensed under the license found in the
 # LICENSE file in the root directory of this source tree
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 import Imath
 import OpenEXR
+import ezexr
 import os
 import importlib
-from learning_indoor_lighting.tools.transformations import *
 import yaml
+import pathlib
+from random import sample
+from numpy import np
 
 
 def dataset_stats_load(filename):
-    # given the complete path and name of the file, loads the statistics
+    """
+    Loads the mean and standard deviation from a file with the following structure:
+    Dataset MEAN R - G - B
+    0.3505775317983936 0.33745820307121455 0.3108691100984408
+    Dataset STD R - G - B
+    0.2885629269999875 0.29015735209885285 0.2939203855287321
+    :param filename: path to the file
+    :return: mean (ndarray of shape 3) and standard deviation (ndarray of shape 3)
+    """
     f = open(filename, 'r')
     lines = f.readlines()
     f.close()
@@ -28,6 +39,12 @@ def dataset_stats_load(filename):
 
 
 def find_images(root, extension='.exr'):
+    """
+    Returns the full path to all files with the given extension inside a folder
+    :param root: str, folder where to look for files
+    :param extension: str, extension of the files
+    :return: list of paths
+    """
     dir = os.path.expanduser(root)
     images_path = []
     files = [x for x in sorted(os.listdir(dir)) if x.endswith(extension)]
@@ -39,6 +56,11 @@ def find_images(root, extension='.exr'):
 
 
 def load_hdr(path):
+    """
+    Loads an HDR file with RGB channels
+    :param path: file location
+    :return: HDR image
+    """
     pt = Imath.PixelType(Imath.PixelType.FLOAT)
     rgb_img_openexr = OpenEXR.InputFile(path)
     rgb_img = rgb_img_openexr.header()['dataWindow']
@@ -62,6 +84,11 @@ def load_hdr(path):
 
 
 def load_hdr_multichannel(path):
+    """
+    Loads an HDR file with RGB, normal (3 channels) and depth (1 channel)
+    :param path: file location
+    :return: HDR image
+    """
     pt = Imath.PixelType(Imath.PixelType.FLOAT)
     rgb_img_openexr = OpenEXR.InputFile(path)
     rgb_img = rgb_img_openexr.header()['dataWindow']
@@ -97,7 +124,7 @@ def load_hdr_multichannel(path):
 
     normal = np.dstack((normal_x, normal_y, normal_z))
 
-    #depth
+    # depth
     depth_str = rgb_img_openexr.channel('distance.Y', pt)
     depth = np.fromstring(depth_str, dtype=np.float32)
     depth.shape = (size_img[1], size_img[0])
@@ -106,11 +133,24 @@ def load_hdr_multichannel(path):
 
 
 def save_hdr(_file, _filename):
-    import ezexr
+    """
+    Saves HDR image
+    :param _file: HDR data
+    :param _filename: str, full path and name
+    :return: none
+    """
     ezexr.imwrite(_filename, _file, pixeltype='HALF')
 
 
 def save_estimation(_pred, _name, _path, _untransform_ops):
+    """
+    Remove normalization done on estimation, then save it
+    :param _pred: HDR data
+    :param _name: filename
+    :param _path: path where to save
+    :param _untransform_ops: list of operatios to unnormalize the data (bring it back to the RGB space)
+    :return:
+    """
     for i, transform in enumerate(_untransform_ops):
         pred_unnormalized = transform(_pred)
     pred_unnormalized = np.clip(pred_unnormalized, 0, pred_unnormalized.max())
@@ -118,38 +158,32 @@ def save_estimation(_pred, _name, _path, _untransform_ops):
 
 
 def to_np(x):
+    """
+    Transforms x from Tensor to numpy
+    :param x: Tensor data
+    :return: numpy data
+    """
     return x.data.cpu().numpy()
 
 
-def log_tensorboard(_model, epoch, tensorboard_logger):
-    for tag, value in _model.named_parameters():
-        tag = tag.replace('.', '/')
-        tensorboard_logger.histo_summary(tag, to_np(value), epoch + 1)
-        try:
-            tensorboard_logger.histo_summary(tag + '/grad', to_np(value.grad), epoch + 1)
-        except AttributeError:
-            tensorboard_logger.histo_summary(tag + '/grad', np.asarray([0]), epoch + 1)
-
-
 def yaml_load(filepath):
+    """
+    Load a yaml file
+    :param filepath: path
+    :return: dict with the yaml contents
+    """
     with open(filepath, "r") as file_descriptor:
         data = yaml.load(file_descriptor, Loader=yaml.FullLoader)
         return data
 
 
-def find_images(root, extension='.exr'):
-    dir = os.path.expanduser(root)
-    images_path = []
-    files = [x for x in sorted(os.listdir(dir)) if x.endswith(extension)]
-    for file in files:
-        path = os.path.join(dir, file)
-        images_path.append(path)
-
-    return images_path
-
-
 class DictAsMember(dict):
     def __getattr__(self, name):
+        """
+        Transforms a dictionary into a class where attributes are the keys
+        :param name: key of the dictionary
+        :return: class with the key as member attribute
+        """
         value = self[name]
         if isinstance(value, dict):
             value = DictAsMember(value)
@@ -157,6 +191,13 @@ class DictAsMember(dict):
 
 
 def load_from_file(module_name, class_name, *kargs):
+    """
+    Load a class inside a module
+    :param module_name: str, module name
+    :param class_name: str, class name
+    :param kargs: any arguments to the class
+    :return: class instance
+    """
     class_inst = None
 
     py_mod = importlib.import_module(module_name)
@@ -170,7 +211,11 @@ def load_from_file(module_name, class_name, *kargs):
 
 
 def check_nans(x):
-    # Check for NaNs and infinities
+    """
+    Check for NaNs and infinities
+    :param x: Tensor
+    :return: none
+    """
     nans = np.sum(np.isnan(x.cpu().data.numpy()))
     infs = np.sum(np.isinf(x.cpu().data.numpy()))
     if nans > 0:
@@ -179,11 +224,41 @@ def check_nans(x):
         print("There is {} infinite values at the output layer".format(infs))
 
 
-def setup_optimizer(model, chosen_optimizer , learning_rate):
+def setup_optimizer(model, chosen_optimizer, learning_rate):
+    """
+    Configures optimizer for training
+    :param model: pytorch model to be trained
+    :param chosen_optimizer: str, name of the optimizer
+    :param learning_rate: learning rate
+    :return: optimizer
+    """
     from torch import optim
     if chosen_optimizer == 'Adam':
         optimizer = optim.Adam(model.parameters(), lr=learning_rate, weight_decay=1e-5)
-    else:
+    elif chosen_optimizer == "SGD":
         optimizer = optim.SGD(model.parameters(), lr=learning_rate, momentum=0.9)
+    else:
+        print("Optimizer not configures")
+        exit(0)
 
     return optimizer
+
+
+def dataset_mean_std(path, extension='exr'):
+    """
+    Calculates the mean and standard deviation of a folder with .exr files
+    :param path: str, path to folder
+    :param extension: str, extension of the dataset
+    :return: mean, std
+    """
+    all_r = all_g = all_b = []
+
+    all_dataset_names = sorted(
+        pathlib.Path(path).glob('*.{}'.format(extension)))
+
+    size_dataset = len(all_dataset_names)
+
+    # find 1000 random files inside the folder to get the mean and std
+    for _, filename in zip(range(1000), sample(all_dataset_names, size_dataset)):
+        if extension == 'exr':
+            img_hdr = load_hdr(str(filename))
