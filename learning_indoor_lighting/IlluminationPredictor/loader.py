@@ -8,12 +8,13 @@
 # LICENSE file in the root directory of this source tree
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-from pytorch_toolbox.loader_base import LoaderBase
-from learning_indoor_lighting.tools.utils import find_images, load_hdr_multichannel, TonemapHDR
 import os
 import torch
 from numpy import inf
 import numpy as np
+from pytorch_toolbox.loader_base import LoaderBase
+from learning_indoor_lighting.tools.utils import find_images, load_hdr_multichannel
+from learning_indoor_lighting.tools.transformations import TonemapHDR
 
 
 class IlluminationPredictorDataset(LoaderBase):
@@ -23,7 +24,6 @@ class IlluminationPredictorDataset(LoaderBase):
         self.transform = transform
         self.dataset_purpose = dataset_purpose
         self.tonemap_hdr = TonemapHDR(gamma=1, percentile=90, max_mapping=.8)
-        # self.images = self.make_dataset(root_dir)
         super().__init__(root_dir, transform.normalization_ops, target_transform)
 
         if self.dataset_purpose != 'test':
@@ -37,11 +37,7 @@ class IlluminationPredictorDataset(LoaderBase):
 
     def make_dataset(self, dir):
         images = []
-        for folder in self.configs.data_folders:
-            if self.dataset_purpose != 'test':
-                images.extend(find_images(os.path.join(dir, folder, self.dataset_purpose)))
-            else:
-                images.extend(find_images(os.path.join(dir, folder)))
+        images.extend(find_images(os.path.join(dir, self.dataset_purpose)))
         import random
         random.shuffle(images)
         return images
@@ -89,6 +85,7 @@ class IlluminationPredictorDataset(LoaderBase):
             target = np.expand_dims(np.fromstring(self.dict_envmap_z[file.rsplit('_m', 1)[0]], dtype=np.float32,
                                                   sep=' '), axis=0)
             target_latent_vector = target.squeeze()
+            target_latent_vector = torch.from_numpy(target_latent_vector).to(self.configs.backend)
         else:
             target_latent_vector = []
 

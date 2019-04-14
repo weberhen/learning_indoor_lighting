@@ -1,0 +1,24 @@
+#paths
+data_path : ../Datasets/objects_ldr/bun_zipper_scene_glossy
+ae_path : ../AutoEncoder
+model_path : ./models/bun_zipper_scene_glossy
+network : learning_indoor_lighting.IlluminationPredictor.net
+hdr_mean_std : ../Datasets/indoor_hdr/dataset_mean_std.txt
+ldr_mean_std : ../Datasets/objects_ldr/bun_zipper_scene_glossy/dataset_mean_std.txt
+
+#training
+train : True
+gradient_clip : False
+use_tensorboard : False
+epochs : 999
+batch_size : 16
+learning_rate : 0.001
+optimizer : Adam
+forget_best_prec : False
+load_best : False
+save_estimation : False
+
+#performance
+workers : 0
+use_shared_memory : True
+backend : cpu

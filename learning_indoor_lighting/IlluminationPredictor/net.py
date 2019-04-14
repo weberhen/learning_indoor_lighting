@@ -11,7 +11,6 @@
 import torch.nn.functional as f
 import torch.nn as nn
 import torch
-from torch.autograd import Variable
 from pytorch_toolbox.network_base import NetworkBase
 from learning_indoor_lighting.tools.utils import check_nans
 from learning_indoor_lighting.AutoEncoder.net import AutoEncoderNet
@@ -61,7 +60,7 @@ class IlluminationPredictorNet(NetworkBase):
         return x
 
     def loss(self, predictions, targets):
-        lz = self.criterion(predictions[0], Variable(targets[0], requires_grad=False).cuda())
+        lz = self.criterion(predictions[0], targets[0])
         return lz
 
     @staticmethod

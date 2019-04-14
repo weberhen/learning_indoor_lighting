@@ -14,9 +14,7 @@ import ezexr
 import os
 import importlib
 import yaml
-import pathlib
-from random import sample
-from numpy import np
+import numpy as np
 
 
 def dataset_stats_load(filename):
@@ -243,22 +241,3 @@ def setup_optimizer(model, chosen_optimizer, learning_rate):
 
     return optimizer
 
-
-def dataset_mean_std(path, extension='exr'):
-    """
-    Calculates the mean and standard deviation of a folder with .exr files
-    :param path: str, path to folder
-    :param extension: str, extension of the dataset
-    :return: mean, std
-    """
-    all_r = all_g = all_b = []
-
-    all_dataset_names = sorted(
-        pathlib.Path(path).glob('*.{}'.format(extension)))
-
-    size_dataset = len(all_dataset_names)
-
-    # find 1000 random files inside the folder to get the mean and std
-    for _, filename in zip(range(1000), sample(all_dataset_names, size_dataset)):
-        if extension == 'exr':
-            img_hdr = load_hdr(str(filename))

@@ -4,7 +4,7 @@ network : learning_indoor_lighting.AutoEncoder.net
 output_path : output_autoencoder
 mean_std : ../Datasets/indoor_hdr/dataset_mean_std.txt
 
-#training
+#model
 load_best : True
 load_last : False
 save_estimation : True
