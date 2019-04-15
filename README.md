@@ -1,24 +1,6 @@
 # Learning to Estimate Indoor Lighting from 3D Objects
 
-http://vision.gel.ulaval.ca/~jflalonde/projects/illumPredict/index.html
-
-In this work, we propose a step towards a more accurate
-prediction of the environment light given a single picture
-of a known object. To achieve this, we developed a deep
-learning method that is able to encode the latent space of
-indoor lighting using few parameters and that is trained on
-a database of environment maps. This latent space is then
-used to generate predictions of the light that are both more
-realistic and accurate than previous methods. To achieve
-this, our first contribution is a deep autoencoder which is
-capable of learning the feature space that compactly models
-lighting. Our second contribution is a convolutional neural
-network that predicts the light from a single image of an
-object with known geometry and reflectance. To train these
-networks, our third contribution is a novel dataset that contains
-21,000 HDR indoor environment maps. The results
-indicate that the predictor can generate plausible lighting
-estimations even from diffuse objects.
+[Project page](http://vision.gel.ulaval.ca/~jflalonde/projects/illumPredict/index.html)
 
 -------
 
@@ -26,6 +8,30 @@ estimations even from diffuse objects.
 Run
 `python setup.py install`
 
-Then install the following lib/toolbox (also `python setup.py install`)
+Then install the following lib/toolbox (also `python setup.py install`):
 * skylibs (https://github.com/weberhen/skylibs.git)
 * pytorch_toolbox (https://github.com/weberhen/pytorch_toolbox)
+
+## Downloading the models/dataset
+
+* [Link]() to the pre-trained illumination predictor models.
+* [Link]() to the pre-trained autoencoder model (latent vector size=128).
+* [Link]() to the LDR datasets to train the illumination predictor.
+
+* place the models at `/learning_indoor_lighting/IlluminationPredictor/models`. Ex: 
+`models/indoor_hdr` and `models/objects_ldr`
+* place the datasets at `/learning_indoor_lighting/Datasets`. Ex: `Datasets/bun_zipper_scene_glossy`
+
+## Visualizing training/testing
+Activate visdom in another terminal:
+
+`python -m visdom.server`
+
+Then go to the terminal: localhost:8097
+
+## Testing the autoencoder
+`cd learning_indoor_lighting/AutoEncoder && python test.py`
+
+## Testing the illumination predictor
+`cd learning_indoor_lighting/IlluminationPredictor && python test.py`
+
