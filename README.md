@@ -26,5 +26,6 @@ estimations even from diffuse objects.
 Run
 `python setup.py install`
 
-* skylibs (https://github.com/soravux/skylibs)
+Then install the following lib/toolbox (also `python setup.py install`)
+* skylibs (https://github.com/weberhen/skylibs.git)
 * pytorch_toolbox (https://github.com/weberhen/pytorch_toolbox)
