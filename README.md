@@ -5,10 +5,13 @@
 -------
 
 ## Dependencies:
+
+
 Run
 `python setup.py install`
 
 Then install the following lib/toolbox (also `python setup.py install`):
+* pytorch (https://pytorch.org/)
 * skylibs (https://github.com/weberhen/skylibs.git)
 * pytorch_toolbox (https://github.com/weberhen/pytorch_toolbox)
 
