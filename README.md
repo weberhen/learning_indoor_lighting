@@ -32,7 +32,7 @@ Activate visdom in another terminal:
 Then go to the terminal: localhost:8097
 
 ## Citation
-`@inproceedings{weber_3dv_18,
+```@inproceedings{weber_3dv_18,
   author    = {Henrique Weber and
                Donald Pr{\'{e}}vost and
                Jean{-}Fran{\c{c}}ois Lalonde},
@@ -41,7 +41,7 @@ Then go to the terminal: localhost:8097
   pages     = {199--207},
   year      = {2018},
 }
-`
+```
 
 ## Testing the autoencoder
 `cd learning_indoor_lighting/AutoEncoder && python test.py`
