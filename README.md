@@ -12,7 +12,7 @@ Then install the following lib/toolbox (also `python setup.py install`):
 * skylibs (https://github.com/weberhen/skylibs.git)
 * pytorch_toolbox (https://github.com/weberhen/pytorch_toolbox)
 
-## Downloading the models/dataset
+## Downloading the models/dataset (coming soon)
 
 * [Link]() to the pre-trained illumination predictor models.
 * [Link]() to the pre-trained autoencoder model (latent vector size=128).
