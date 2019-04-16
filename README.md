@@ -22,8 +22,8 @@ Then install the following lib/toolbox (also `python setup.py install`):
 * [Link]() to the LDR datasets to train the illumination predictor.
 
 * place the models at `/learning_indoor_lighting/IlluminationPredictor/models`. Ex: 
-`models/indoor_hdr` and `models/objects_ldr`
-* place the datasets at `/learning_indoor_lighting/Datasets`. Ex: `Datasets/bun_zipper_scene_glossy`
+`models/bun_zipper_scene_glossy/model_best.pth.tar`
+* place the datasets at `/learning_indoor_lighting/Datasets`. Ex: `Datasets/indoor_hdr/train` and `Datasets/objects_ldr/bun_zipper_scene_glossy/train`
 
 ## Visualizing training/testing
 Activate visdom in another terminal:
