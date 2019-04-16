@@ -100,7 +100,7 @@ class AutoEncoderNet(NetworkBase):
         return x
 
     def loss(self, predictions, targets):
-        weights = Variable(torch.from_numpy(self.sa), requires_grad=False).float().cuda()
+        weights = Variable(torch.from_numpy(self.sa), requires_grad=False).float().to(self.configs.backend)
         # weighted L1
         wl1 = torch.sum(weights * torch.abs(predictions[0] - self.saved_input))
         return wl1

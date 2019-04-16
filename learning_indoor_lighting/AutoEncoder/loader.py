@@ -39,7 +39,8 @@ class AutoEncoderDataset(LoaderBase):
 
     def from_index(self, index):
 
-        rgb_path = self.images[index]
-        image = [load_hdr(rgb_path)]
+        path = self.images[index]
+        image = [load_hdr(path)]
         index = torch.from_numpy(np.array([index]))
-        return image, index, []
+        info = {'path': os.path.basename(os.path.normpath(path))}
+        return image, index, info

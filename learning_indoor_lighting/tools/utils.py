@@ -15,6 +15,8 @@ import os
 import importlib
 import yaml
 import numpy as np
+import torch
+from torch.autograd import Variable
 
 
 def dataset_stats_load(filename):
@@ -241,3 +243,36 @@ def setup_optimizer(model, chosen_optimizer, learning_rate):
 
     return optimizer
 
+
+class LatentVectorHandler:
+
+    latent_vector = []
+    filename_vector = []
+
+    @classmethod
+    def append(cls, latent_vector, filename):
+        """
+        Append latent vector to list of latent vectors (and its name to the names vector)
+        :param latent_vector: Tensor, latent vector to be added
+        :param filename: str, name of the image
+        :return:
+        """
+        cls.latent_vector.append(latent_vector)
+        cls.filename_vector.append(filename)
+
+    @classmethod
+    def save(cls, path, dataset_name):
+        """
+        Saves latent vectors to file (and the names in another file
+        :param path: str, full path to the txt files
+        :param dataset_name: str, name of the dataset (usually 'train')
+        :return:
+        """
+        with open('{}/{}_z_values.txt'.format(path, dataset_name), 'wb') as f:
+            for item in cls.latent_vector:
+                item = item.cpu().data.numpy()
+                np.savetxt(f, item)
+        f = open('{}/{}_z_names.txt'.format(path, dataset_name), 'w')
+        for item in cls.filename_vector:
+            f.write('{}\n'.format(item))
+        cls.latent_vector = []
