@@ -9,6 +9,7 @@
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 import sys
+import os
 from torch.utils import data
 from learning_indoor_lighting.AutoEncoder.loader import AutoEncoderDataset
 from learning_indoor_lighting.tools.utils import yaml_load, DictAsMember, load_from_file, LatentVectorHandler
@@ -34,7 +35,8 @@ def test(train_loop_handler):
             callback.batch(y_pred, data, target, info, is_train=False,
                            tensorboard_logger=train_loop_handler.tensorboard_logger)
 
-    lvh.save('.', 'train')
+    _, file = os.path.split(opt.data_path)
+    lvh.save('.', file)
 
 
 if __name__ == '__main__':

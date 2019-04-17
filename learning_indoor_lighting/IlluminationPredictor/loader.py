@@ -82,10 +82,10 @@ class IlluminationPredictorDataset(LoaderBase):
         data = data.transpose(1,2,0)
 
         if self.dataset_purpose != 'test':
-            target = np.expand_dims(np.fromstring(self.dict_envmap_z[file.rsplit('_m', 1)[0]], dtype=np.float32,
+            target = np.expand_dims(np.fromstring(self.dict_envmap_z[file.rsplit('_m', 1)[0]+'.exr'], dtype=np.float32,
                                                   sep=' '), axis=0)
             target_latent_vector = target.squeeze()
-            target_latent_vector = torch.from_numpy(target_latent_vector).to(self.configs.backend)
+            # target_latent_vector = torch.from_numpy(target_latent_vector).to(self.configs.backend)
         else:
             target_latent_vector = []
 

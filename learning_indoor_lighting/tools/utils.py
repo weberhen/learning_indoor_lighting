@@ -257,7 +257,7 @@ class LatentVectorHandler:
         :param filename: str, name of the image
         :return:
         """
-        cls.latent_vector.append(latent_vector)
+        cls.latent_vector.append(latent_vector.cpu().data.numpy())
         cls.filename_vector.append(filename)
 
     @classmethod
@@ -270,7 +270,6 @@ class LatentVectorHandler:
         """
         with open('{}/{}_z_values.txt'.format(path, dataset_name), 'wb') as f:
             for item in cls.latent_vector:
-                item = item.cpu().data.numpy()
                 np.savetxt(f, item)
         f = open('{}/{}_z_names.txt'.format(path, dataset_name), 'w')
         for item in cls.filename_vector:
