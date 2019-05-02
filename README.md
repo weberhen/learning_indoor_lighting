@@ -16,13 +16,12 @@
 
 ## Downloading the models/dataset (coming soon)
 
-* [Link]() to the pre-trained illumination predictor models.
-* [Link]() to the pre-trained autoencoder model (latent vector size=128).
-* [Link]() to the LDR datasets to train the illumination predictor.
+* [Link](http://rachmaninoff.gel.ulaval.ca/static/3dv18_illpred/models.tar.gz) to the pre-trained illumination predictor models (183MB).
+* [Link](http://rachmaninoff.gel.ulaval.ca/static/3dv18_illpred/objects_ldr.tar.gz) to the LDR datasets to train the illumination predictor. (3.5GB)
 
 * place the models at `/learning_indoor_lighting/IlluminationPredictor/models`. Ex: 
-`models/bun_zipper_scene_glossy/model_best.pth.tar`
-* place the datasets at `/learning_indoor_lighting/Datasets`. Ex: `Datasets/indoor_hdr/train` and `Datasets/objects_ldr/bun_zipper_scene_glossy/train`
+`models/bun_zipper_glossy/model_best.pth.tar`
+* place the datasets at `/learning_indoor_lighting/Datasets`. Ex: `Datasets/indoor_hdr/train` and `Datasets/objects_ldr/bun_zipper_glossy/train`
 
 ## Visualizing training/testing
 Activate visdom in another terminal:
