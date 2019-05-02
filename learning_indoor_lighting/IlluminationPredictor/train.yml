@@ -1,10 +1,10 @@
 #paths
-data_path : ../Datasets/objects_ldr/bun_zipper_roughplastic
+data_path : ../Datasets/objects_ldr/bun_zipper_diffuse
 ae_path : ../AutoEncoder
-model_path : ./models/bun_zipper_roughplastic
+model_path : ./models/bun_zipper_diffuse
 network : learning_indoor_lighting.IlluminationPredictor.net
 hdr_mean_std : ../Datasets/indoor_hdr/dataset_mean_std.txt
-ldr_mean_std : ../Datasets/objects_ldr/bun_zipper_roughplastic/dataset_mean_std.txt
+ldr_mean_std : ../Datasets/objects_ldr/bun_zipper_diffuse/dataset_mean_std.txt
 
 #training
 train : True
