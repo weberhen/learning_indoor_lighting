@@ -1,6 +1,6 @@
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # Created by: Henrique Weber
-# LVSN, Universite Labal
+# LVSN, Universite Laval and Institute National d'Optique
 # Email: henrique.weber.1@ulaval.ca
 # Copyright (c) 2018
 #
@@ -60,6 +60,7 @@ class IlluminationPredictorNet(NetworkBase):
         return x
 
     def loss(self, predictions, targets):
+        self.ae.eval()
         lz = self.criterion(predictions[0], targets[0])
         return lz
 

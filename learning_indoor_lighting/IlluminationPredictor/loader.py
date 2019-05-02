@@ -1,6 +1,6 @@
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # Created by: Henrique Weber
-# LVSN, Universite Labal
+# LVSN, Universite Laval and Institute National d'Optique
 # Email: henrique.weber.1@ulaval.ca
 # Copyright (c) 2018
 #
@@ -37,7 +37,10 @@ class IlluminationPredictorDataset(LoaderBase):
 
     def make_dataset(self, dir):
         images = []
-        images.extend(find_images(os.path.join(dir, self.dataset_purpose)))
+        if self.dataset_purpose != 'test':
+            images.extend(find_images(os.path.join(dir, self.dataset_purpose)))
+        else:
+            images.extend(find_images(dir))
         import random
         random.shuffle(images)
         return images
@@ -71,8 +74,12 @@ class IlluminationPredictorDataset(LoaderBase):
         if normals.max() != 1:
             normals = np.zeros(normals.shape)
             print('ERROR')
-        assert normals.max() == 1
-        assert normals.min() == 0
+        try:
+            assert normals.max() == 1
+            assert normals.min() == 0
+        except AssertionError:
+            print(normals.max())
+            print(rgb_path)
 
         normals[mask_normals] = 0
         normals = normals.transpose(2, 0, 1)

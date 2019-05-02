@@ -1,6 +1,6 @@
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # Created by: Henrique Weber
-# LVSN, Universite Labal
+# LVSN, Universite Laval and Institute National d'Optique
 # Email: henrique.weber.1@ulaval.ca
 # Copyright (c) 2018
 #
@@ -23,10 +23,12 @@ class IlluminationPredictorCallback(LoopCallbackBase):
         self.from_index = test_dataset.from_index
         self.get_name = test_dataset.get_name
         self.opt = opt
-        self.testing_loader = testing_loader
         self.ae_model = ae_model
+        self.ae_model.eval()
+        self.testing_loader = testing_loader
 
     def batch(self, predictions, network_inputs, targets, info, is_train=True, tensorboard_logger=None):
+        self.ae_model.eval()
         self.show_example(predictions, targets, info)
         if self.opt.save_estimation:
             _, filename = os.path.split(info['name'][0])

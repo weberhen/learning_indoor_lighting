@@ -1,6 +1,6 @@
 #paths
-data_path : ../Datasets/objects_ldr/bun_zipper_scene_glossy/test/0_0
-ldr_mean_std : ../Datasets/objects_ldr/bun_zipper_scene_glossy/dataset_mean_std.txt
+data_path : ../Datasets/objects_ldr/bun_zipper_glossy/test/0_0
+ldr_mean_std : ../Datasets/objects_ldr/bun_zipper_glossy/dataset_mean_std.txt
 model_path : ./models/bun_zipper_scene_glossy
 
 output_path : output_illumination_predictor
@@ -17,4 +17,4 @@ save_estimation : True
 #performance
 workers : 0
 use_shared_memory : True
-backend : cpu
+backend : cuda
