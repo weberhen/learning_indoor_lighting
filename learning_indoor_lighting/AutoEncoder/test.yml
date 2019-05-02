@@ -1,5 +1,5 @@
 #paths
-data_path : ../Datasets/indoor_hdr/test
+data_path : ../Datasets/indoor_hdr/valid
 network : learning_indoor_lighting.AutoEncoder.net
 output_path : output_autoencoder
 mean_std : ../Datasets/indoor_hdr/dataset_mean_std.txt
@@ -12,4 +12,4 @@ save_estimation : True
 #performance
 workers : 0
 use_shared_memory : True
-backend : cpu
+backend : cuda

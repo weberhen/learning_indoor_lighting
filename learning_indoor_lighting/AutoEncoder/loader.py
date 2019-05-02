@@ -1,6 +1,6 @@
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # Created by: Henrique Weber
-# LVSN, Universite Labal
+# LVSN, Universite Laval and Institute National d'Optique
 # Email: henrique.weber.1@ulaval.ca
 # Copyright (c) 2018
 #
@@ -24,7 +24,7 @@ class AutoEncoderDataset(LoaderBase):
     def make_dataset(self, root):
         dir = os.path.expanduser(root)
         images = []
-        files = [x for x in os.listdir(dir) if x.endswith('.exr')]
+        files = [x for x in os.listdir(dir) if x.endswith('_0.exr')]
         for file in files:
             path = os.path.join(dir, file)
             images.append(path)
