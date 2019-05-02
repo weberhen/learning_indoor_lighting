@@ -1,12 +1,11 @@
 #paths
-data_path : ../Datasets/objects_ldr/bun_zipper_glossy/test/0_0
-ldr_mean_std : ../Datasets/objects_ldr/bun_zipper_glossy/dataset_mean_std.txt
-model_path : ./models/bun_zipper_scene_glossy
+data_path : ../Datasets/objects_ldr/bun_zipper_diffuse/test/0_0
+ldr_mean_std : ../Datasets/objects_ldr/bun_zipper_diffuse/dataset_mean_std.txt
+model_path : ./models/bun_zipper_diffuse
 
 output_path : output_illumination_predictor
 network : learning_indoor_lighting.IlluminationPredictor.net
 hdr_mean_std : ../Datasets/indoor_hdr/dataset_mean_std.txt
-latent_vector_mean_std : ../AutoEncoder/train_z_mean_std.txt
 
 #model
 train : False
