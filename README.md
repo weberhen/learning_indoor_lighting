@@ -1,7 +1,9 @@
 # Learning to Estimate Indoor Lighting from 3D Objects
 
 [Project page](http://vision.gel.ulaval.ca/~jflalonde/projects/illumPredict/index.html)
+
 [Explanation video](https://vimeo.com/289896333)
+
 [Demonstration](https://vimeo.com/289868114)
 
 -------
