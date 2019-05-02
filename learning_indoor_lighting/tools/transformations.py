@@ -1,6 +1,6 @@
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # Created by: Henrique Weber
-# LVSN, Universite Labal
+# LVSN, Universite Laval and Institute National d'Optique
 # Email: henrique.weber.1@ulaval.ca
 # Copyright (c) 2018
 #
