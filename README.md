@@ -14,7 +14,7 @@
 ## Installation
 `python setup.py install`
 
-## Downloading the models/dataset (coming soon)
+## Downloading the models/dataset
 
 * [Link](http://rachmaninoff.gel.ulaval.ca/static/3dv18_illpred/models.tar.gz) to the pre-trained illumination predictor models (183MB).
 * [Link](http://rachmaninoff.gel.ulaval.ca/static/3dv18_illpred/objects_ldr.tar.gz) to the LDR datasets to train the illumination predictor. (3.5GB)
