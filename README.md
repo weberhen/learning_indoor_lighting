@@ -12,6 +12,7 @@
 
 * pytorch (https://pytorch.org/)
 * Install the following lib/toolbox (also `python setup.py install`):
+    * `sudo apt-get install openexr libopenexr-dev`
     * skylibs (https://github.com/weberhen/skylibs.git)
     * pytorch_toolbox (https://github.com/weberhen/pytorch_toolbox)
     
