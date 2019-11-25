@@ -24,7 +24,7 @@ class AutoEncoderDataset(LoaderBase):
     def make_dataset(self, root):
         dir = os.path.expanduser(root)
         images = []
-        files = [x for x in os.listdir(dir) if x.endswith('_0.exr')]
+        files = [x for x in os.listdir(dir) if x.endswith('.exr')]
         for file in files:
             path = os.path.join(dir, file)
             images.append(path)
